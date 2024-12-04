@@ -20,7 +20,7 @@ void setup() {
     scale.set_gain(128);
 
     // Kalibrierungswert setzen (Wert anpassen, um das richtige Gewicht zu erhalten)
-    scale.set_scale(2280.f); // todo: Beispiel-Kalibrierwert evtl noch Kalibrieren
+    scale.set_scale(15244.f); // todo: Beispiel-Kalibrierwert evtl noch Kalibrieren
     scale.tare();            // Tare: Gewicht auf Null setzen
 
     Serial.println("HX711 ist bereit!");
@@ -37,5 +37,5 @@ void loop() {
         Serial.println("HX711 nicht bereit!");
     }
 
-    delay(500);
+    delay(100);
 }
