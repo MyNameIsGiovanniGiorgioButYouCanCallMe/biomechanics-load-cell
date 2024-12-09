@@ -16,7 +16,7 @@ except ImportError:
     serial = None
 
 # Global Variables
-serial_data = []
+serial_data = []  # Store (timestamp, value) tuples
 use_fake_data = True  # Flag to use mouse-based data if the serial port is unavailable
 data_folder = None
 data_file_path = None
@@ -66,14 +66,17 @@ def read_serial():
             time.sleep(0.1)
             continue
 
-        # Store the data in the global list
-        serial_data.append(value)
+        # Get the current Unix timestamp in seconds (with milliseconds)
+        timestamp = time.time()
+
+        # Store the data as a tuple (timestamp, value) in the global list
+        serial_data.append((timestamp, value))
 
         if data_file_path:
             # Write the data to the CSV file
             with data_file_path.open('a', newline='') as f:
                 writer = csv.writer(f)
-                writer.writerow([datetime.now().strftime('%Y-%m-%d %H:%M:%S'), value])
+                writer.writerow([timestamp, value])
 
         time.sleep(0.2)  # Delay for CPU optimization
 
@@ -82,7 +85,7 @@ serial_thread = threading.Thread(target=read_serial, daemon=True)
 serial_thread.start()
 
 # Dash app layout
-app = dash.Dash(__name__, external_stylesheets=['https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.3/flatly/bootstrap.min.css'])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
 
 app.layout = html.Div([
    html.H1('Arduino-based Data Monitor', className='text-center mb-4'),
@@ -127,11 +130,20 @@ def update_plot(n):
     if len(serial_data) > SHOWN_POINTS:  # Limit to SHOWN_POINTS points
         serial_data = serial_data[-SHOWN_POINTS:]
 
+    timestamps = [point[0] for point in serial_data]
+    values = [point[1] for point in serial_data]
+
+    if timestamps:
+        # Calculate relative times (relative to the first timestamp)
+        relative_times = [t - min(timestamps) for t in timestamps]
+    else:
+        relative_times = [0]  # Default value to avoid errors
+
     figure = go.Figure(
         data=[
             go.Scatter(
-                x=list(range(len(serial_data))),
-                y=serial_data,
+                x=relative_times,
+                y=values,
                 mode='lines+markers',
                 line=dict(color='royalblue'),
                 marker=dict(size=5)
@@ -139,14 +151,15 @@ def update_plot(n):
         ],
         layout=go.Layout(
             title='Live Data Plot',
-            xaxis_title='Time [s]',
+            xaxis_title='Time (s)',  # Relative time in seconds
             yaxis_title='Weight [kg]',
-            xaxis=dict(range=[0, SHOWN_POINTS]),  # Fixed range for 100 points
-            yaxis=dict(range=[0, SHOWN_POINTS]),  # Range for simulated data
+            xaxis=dict(range=[0, max(relative_times)] if relative_times else [0, 1]),  # Start at 0, end at max relative time
+            yaxis=dict(range=[min(values) if values else 0, max(values) if values else 1]),  # Auto-range for y-axis
             template='plotly_white'
         )
     )
     return figure
+
 
 # Callbacks to control fake data
 @app.callback(
@@ -190,7 +203,7 @@ def start_new_run(n_clicks, run_name):
     # Write CSV headers
     with data_file_path.open('w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(['Timestamp', 'Value'])
+        writer.writerow(['Unix Timestamp', 'Value'])
 
     return f"New run started: {folder_name}"
 
