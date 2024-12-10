@@ -17,13 +17,13 @@ except ImportError:
 
 # Global Variables
 serial_data = []  # Store (timestamp, value) tuples
-use_fake_data = True  # Flag to use mouse-based data if the serial port is unavailable
+use_fake_data = False  # Flag to use mouse-based data if the serial port is unavailable
 data_folder = None
 data_file_path = None
 
 # Serial port configuration
 BAUD_RATE = 115200
-SERIAL_PORT = 'COM3'  # Change to your serial port
+SERIAL_PORT = 'COM11'  # Change to your serial port
 
 SHOWN_POINTS = 100  # Number of points to show on the plot
 
@@ -39,8 +39,11 @@ def connect_to_serial():
             print(f"Connected to {SERIAL_PORT}")
             break
         except Exception as e:
-            print(f"Failed to connect to {SERIAL_PORT}: {e}. Retrying in 5 seconds...")
-            time.sleep(5)  # Retry every 5 seconds
+            if ser and ser.is_open:
+                break
+            else:
+                print(f"Failed to connect to {SERIAL_PORT}: {e}. Retrying in 5 seconds...")
+                time.sleep(5)  # Retry every 5 seconds
 
 # Start the serial connection in a separate thread
 if serial:
@@ -58,7 +61,7 @@ def read_serial():
         elif ser and ser.in_waiting > 0:
             try:
                 line = ser.readline().decode('utf-8').strip()
-                value = float(line)
+                value = float(''.join(filter(str.isdigit, line)) or 0)
                 print(f"Serial Data: {value}")
             except ValueError:
                 continue  # Ignore invalid data
@@ -170,14 +173,20 @@ def update_plot(n):
     prevent_initial_call=True
 )
 def toggle_fake_data(start_clicks, stop_clicks):
-    """Start or stop generating fake data."""
+    """Start or stop generating fake data, but only if 'use_fake_data' is True."""
     global use_fake_data
+
+    if not use_fake_data:
+        # If fake data is disabled, the start button is always disabled
+        return True, True
+
     if dash.ctx.triggered_id == 'start-data':
         use_fake_data = True
     elif dash.ctx.triggered_id == 'stop-data':
         use_fake_data = False
 
     return (True, False) if use_fake_data else (False, True)
+
 
 # Callback to start a new run
 @app.callback(
