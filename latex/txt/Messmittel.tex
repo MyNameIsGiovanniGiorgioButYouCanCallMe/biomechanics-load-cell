@@ -13,21 +13,22 @@ In diesem Projekt wird der Arduino Nano verwendet. \\
 \begin{center}
     \centering
     \includegraphics[width=0.9\textwidth]{img/Nano-Pinlayout.png}
-    \captionof{figure}[Nano-Pinlayout ]{Nano-Pinlayout \cite{Arduino.cc}}\label{Nano-Pinlayout}
+    \captionof{figure}[Nano-Pinlayout ]{Nano-Pinlayout \cite{Arduino}}\label{Nano-Pinlayout}
 \end{center}
 
 \begin{center}
     \centering
     \includegraphics[width=0.6\textwidth]{img/HX711.png}
-    \captionof{figure}[HX711]{HX711 \cite{prilchen.de}}\label{HX711}
+    \captionof{figure}[HX711]{HX711 \cite{prilchen}}\label{HX711}
 \end{center}
 
+\begin{figure}
+   \centering
+   \includegraphics[width=0.6\textwidth]{img/wägezelle_verschaltung.png}
+   \caption{HX711 Schaltung mit Arduino Nano \cite{prilchen}}
+   \label{HX711-Nano-Schaltung}
+\end{figure}
 
-\begin{center}
-    \centering
-    \includegraphics[width=0.8\textwidth]{img/wägezelle_verschaltung.png}
-    \captionof{figure}[HX711 Schaltung mit Arduino Nano]{HX711 \cite{prilchen.de}}\label{HX711-Nano-Schaltung}
-\end{center}
 
 Um die Signale der Wägezelle an den HX711 weiterzugeben und die Signale des HX711 mit dem Arduino Nano verarbeiten und die Daten lesbar darzustellen, müssen die drei Komponenten miteinander verschaltet werden und korrekt kommunizieren. \\
 Zuerst wird die Wägezelle an eine 5 V Gleichstromquelle angeschlossen und dann mit dem HX711 verbunden. Wodurch die Wägezelle die analogen Signale an den HX711 weitergeben kann. Der HX711 wandelt sie dann in ein digitales Signal und gibt dieses an den Arduino Nano weiter. Der VCC-Pin HX711 wird mit dem 5V-Pin des Arduino Nano verbunden. Der GND-Pin mit dem GND-Pin des Ardiunos. Der DT-Pin ist der Datenausgang des HX711 und wird mit irgendeinem der Digital-Pins des Nanos verbunden, genauso wie der SCK-Pin, z.B. $DT-Pin -> D3-Pin$ und $SCK-Pin -> D2-Pin$. Der SCK-Pin oder serial-clock-Pin steuert die Übertragung des Signals des DT-Pins. Der Arduino gibt auf dem SCK-Pin den Takt vor, mit dem der HX711 die Daten an den Mikrocontroller sendet. Der Ardiuno setzt den SCK-Pin auf high und dann wieder auf low. Dieser Wechsel, vom Ende eines low-Signals zu einem high- und wieder einem low-Signal ist ein Takt. Der HX711 sendet dann pro Takt ein Bit, also einen low-Puls für 0 und einen high-Puls für 1. \\
@@ -86,19 +87,25 @@ Sie können nun beliebig aufbereitet und analysiert werden.
 Mit einem EMG kann die elektrische Muskel-Aktivität gemessen werden.
 
 Dazu wird die elektrische Aktivität in einem ruhenden und einem kontrahierten Muskel gemessen. Das Signal entsteht aus dem Aktionspotential der Muskelfasermembran und dem Depolarisations- und Repolarisationsverlauf, der in \autoref{Depolarisations- und Repolarisationsverlauf} als Funktion der Zeit dargestellt ist. Im Ruhetonus liegt das Potential zwischen $-80$ und  $-90$ mV.
-
-\begin{center}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{img/De- Repolarisation.PNG}
-    \captionof{figure}[De- und Repolarisation und Aktionspotential Muskelfasermembran]{De- und Repolarisation und Aktionspotential Muskelfasermembran \cite{Vorlesung Dr. Lehner: Muskulatur-EMG}}\label{Depolarisations- und Repolarisationsverlauf}
-\end{center}
+\begin{figure}[h!]
+      \centering
+      \includegraphics[width=0.8\textwidth]{img/De- Repolarisation.PNG}
+      \caption{De- und Repolarisation und Aktionspotential Muskelfasermembran \cite{Vorlesung-Muskulatur-EMG}}
+      \label{fig:depolarisations-und-repolarisationsverlauf}
+\end{figure}
+% \begin{center}[h!]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{img/De- Repolarisation.PNG}
+%     \captionof{figure}[De- und Repolarisation und Aktionspotential Muskelfasermembran]{De- und Repolarisation und Aktionspotential Muskelfasermembran \cite{Vorlesung Dr. Lehner: Muskulatur-EMG}}
+%     \label{fig:depolarisations-und-repolarisationsverlauf}
+% \end{center}
 
 Eine Muskelontraktion startet auf Sarkomerebene. Durch das Zusammenwirken aller Sarkomere wird die Umwandlung von chemischer Energie in mechanische Energie als Kontraktion des Muskels sichtbar.\\
 \\
 Ein  Nervenimpuls gelangt als Aktionspotential über das Axon eines Motoneurons zum Axonende. \\
-Durch Neurotransmitter die in den postsynaptischen Spalt ausgeschüttet und dann an den Rezeptor der postsynaptischen Membran binden, wird der Prozess der Depolarisation in der Muskelfaser ausgelöst, der auf der linken Seite von  \autoref{Depolarisations- und Repolarisationsverlauf} dargestellt ist:\\
+Durch Neurotransmitter die in den postsynaptischen Spalt ausgeschüttet und dann an den Rezeptor der postsynaptischen Membran binden, wird der Prozess der Depolarisation in der Muskelfaser ausgelöst, der auf der linken Seite von  \autoref{fig:depolarisations-und-repolarisationsverlauf} dargestellt ist:\\
 \\
-Der Rezeptor ist ein Kanal für Kationen, also positiv geladene Ionen wie Natrium-, Calcium- oder Kaliumionen. Wird der Ionenkanal geöffnet, kommt es zum Einfluss von Kationen und zu einer  Depolarisation der Muskelfaser. Wird ein gewisses Schwellenpotential überschritten, öffnen sich spannungsabhängige Natrium-Kanäle, wodurch ein Aktionspotential ausgelöst wird, das als EMG-Signal gemessen werden kann. In \autoref{Depolarisations- und Repolarisationsverlauf} als Schwelle gekennzeichet, ab der die Steigung der Potential-Funktion zunimmt, bis die Funktion bis $+20$ bis $+30$ mV steigt.
+Der Rezeptor ist ein Kanal für Kationen, also positiv geladene Ionen wie Natrium-, Calcium- oder Kaliumionen. Wird der Ionenkanal geöffnet, kommt es zum Einfluss von Kationen und zu einer  Depolarisation der Muskelfaser. Wird ein gewisses Schwellenpotential überschritten, öffnen sich spannungsabhängige Natrium-Kanäle, wodurch ein Aktionspotential ausgelöst wird, das als EMG-Signal gemessen werden kann. In \autoref{fig:depolarisations-und-repolarisationsverlauf} als Schwelle gekennzeichet, ab der die Steigung der Potential-Funktion zunimmt, bis die Funktion bis $+20$ bis $+30$ mV steigt.
 Das Aktionenpotential löst nun wiederum die Öffnung von spannungsgesteuerten Calcium-Kanälen aus, wodurch Calcium-Ionen in der Muskelfaser freigesetzt werden. Es kommt zu einer Anhäufung von Calcium-Ionen in der Muskelfaser. Dadurch steigt Calciumkonzentration, was die Kontraktion der Muskelfaser auslöst. \\
 Noch bevor der Höhepunkt des Aktionspotentials erreicht ist, werden die Natriumkanäle inaktiv und positiv geladene Kalium strömen aus der Zelle. Das Potential nähert sich nach einer Hyperpolarisationsphase, während der das Pontential unter das Ruhepotential von $-80$ mV fällt, wieder dem Ruhepotential an.
 

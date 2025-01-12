@@ -2,11 +2,40 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
 
-IMG_PATH = Path(__file__).parents[1] / "img"
 
-DATA_PATH = (
-    Path(__file__).parents[1] / "data" / "serial_data_Felix_2025-01-09_17-39-41.csv"
-)
+
+IMG_PATH = Path(__file__).parents[1] / "serial-read-out" / "img"
+
+DATA_PATH = Path(__file__).parents[1] / "serial-read-out" / "data" / "serial_data_Any.csv"
+
+NAME = "Any"
+
+Person = {
+    "Any":{
+        "weight": 60,
+        "Start": 28,
+        "Ende": 67
+    },
+    "Felix":{
+        "weight": 110,
+        "Start": 28,
+        "Ende": 54
+    },
+    "Giorgio":{
+        "weight": 75,
+        "Start": 21,
+        "Ende": 47
+    },
+    "Max":{
+        "weight": 80,
+        "Start": 13,
+        "Ende": 38
+    },
+
+}
+
+
+print(DATA_PATH)
 # print("CSV-Pfad:", DATA_PATH)
 
 # ---------------------------------------------
@@ -76,7 +105,7 @@ plt.ylabel("Wert [kg]")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.savefig(IMG_PATH / "Messdaten.png")
+plt.savefig(IMG_PATH / f"Messdaten - {NAME}.png")
 plt.cla()
 # plt.show()
 
@@ -97,12 +126,12 @@ difference = [vals_left[i] - vals_right[i] for i in range(min_length)]
 
 plt.figure(figsize=(10, 4))
 plt.plot(common_times, difference, marker="o", markersize=2, color="purple")
-plt.title("Differenz (Left - Right) vs. Zeit")
+plt.title(f"Differenz ($m_\\text{{Left}} - m_\\text{{Right}}$) über die Zeit")
 plt.xlabel("Zeit [s] (relativ zum ersten Messwert)")
-plt.ylabel("Left - Right [kg]")
+plt.ylabel(f"$m_\\text{{Left}} - m_\\text{{Right}}$ [kg]")
 plt.grid(True)
 plt.tight_layout()
-plt.savefig(IMG_PATH / "Differenz.png")
+plt.savefig(IMG_PATH / f"Differenz - {NAME}.png")
 plt.cla()
 # plt.show()
 
@@ -126,9 +155,31 @@ plt.xlabel("Zeit [s] (relativ zum ersten Messwert)")
 plt.ylabel("Kraft Delta [kg]")
 plt.grid(True)
 plt.tight_layout()
-plt.savefig(IMG_PATH / "Anys Idea.png")
+plt.savefig(IMG_PATH / f"Anys Idea - {NAME}.png")
 plt.cla()
 # plt.show()
 
 
+time_span = range(Person[NAME]["Start"], Person[NAME]["Ende"])
+differenz = [vals_left[i] - vals_right[i] for i in time_span]
+
+
+plt.figure(figsize=(10, 4))
+# plt.plot(common_times, combined_weight, marker="o", markersize=2, color="green", label="Summe")
+plt.plot(time_span, differenz, marker="o", markersize=2, color="red", label="Differenz")
+# plt.plot(common_times, right, marker="o", markersize=2, color="red")
+plt.title("Summe von Links und Rechts")
+plt.xlabel("Zeit [s] (relativ zum ersten Messwert)")
+plt.ylabel("Kraft [kg]")
+plt.grid(True)
+plt.tight_layout()
+plt.savefig(IMG_PATH / f"Summe Links Rechts - {NAME}.png")
+plt.show()
+plt.cla()
+
 print(f"Plots for {DATA_PATH} have been created")
+
+print(f"Mean right leg in specified time span: {np.mean(vals_right[Person[NAME]['Start']:Person[NAME]['Ende']])}")
+print(f"Mean left leg in specified time span: {np.mean(vals_left[Person[NAME]['Start']:Person[NAME]['Ende']])}")
+
+print(f"Mean difference in specified time span: {np.mean(differenz)}")
