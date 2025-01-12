@@ -1,0 +1,157 @@
+% Author:   Giorgio Färber
+% Date:     2024-04
+
+\documentclass[11pt, titlepage]{article}
+
+%% Import all packages %%
+
+% Language and Fonts
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{csquotes}
+\usepackage[T1]{fontenc}
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+
+
+
+% Page formatting
+\usepackage{geometry}
+\usepackage{scrlayer-scrpage}
+\usepackage{textcmds}
+\usepackage{lastpage}
+\geometry{
+    paper=a4paper,
+    inner=2.0cm, % Inner margin
+    outer=2.0cm, % Outer margin
+    bindingoffset=0.0cm, % Binding offset
+    top=2.0cm, % Top margin
+    bottom=2.0cm, % Bottom margin
+}
+
+% Maths
+\usepackage{amsmath}
+\usepackage{eqparbox}
+
+% Allow Python
+% \usepackage{datatool, filecontents}
+% \input{Latex/special-pages/result_values}
+
+
+
+% SI unit Syntax
+\usepackage{siunitx}
+
+% Tables and Graphics
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+% Multiline Comments
+\usepackage{comment}
+
+% Code Snippets
+\usepackage{listings}
+\usepackage{xcolor}
+    % Define custom colors for syntax highlighting
+    \definecolor{mygreen}{rgb}{0,0.6,0}
+    \definecolor{mygray}{rgb}{0.5,0.5,0.5}
+    \definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+    % Configure listings settings
+    \lstset{ %
+    backgroundcolor=\color{white},   % Choose the background color
+    basicstyle=\ttfamily\footnotesize, % Set the font style
+    breaklines=true,                 % Automatic line breaking
+    commentstyle=\color{mygreen},    % Style for comments
+    keywordstyle=\color{blue},       % Style for keywords
+    stringstyle=\color{mymauve},     % Style for strings
+    numberstyle=\tiny\color{mygray}, % Style for line numbers
+    numbers=left,                    % Line numbers on the left
+    numbersep=5pt,                   % Space between line numbers and code
+    frame=single,                    % Frame around the code
+    language=[x86masm]Assembler,     % Set the language to Assembly
+    xleftmargin=30pt,                    % Left margin
+    xrightmargin=30pt,                   % Right margin
+    aboveskip=10pt,                      % Space above the listing
+    belowskip=10pt,                       % Space below the listing
+    }
+
+% Bibliography
+\usepackage[
+   natbib=true,
+   style=numeric,
+   sorting=none
+   ]
+   {biblatex}
+% \usepackage{biblatex}
+\addbibresource{Sources.bib}
+\usepackage{pdfpages}
+
+% Citation
+\usepackage[
+    left = \flqq{},%
+    right = \frqq{},%
+    leftsub = \flq{},%
+    rightsub = \frq{} %
+]{dirtytalk}
+
+% Glossary
+% \usepackage{glossaries}
+% \usepackage[acronym, toc, nonumberlist]{glossaries}
+% \usepackage[nonumberlist, nopostdot, noindex]{glossaries}
+% \usepackage[automake]{glossaries-extra}
+
+% \newglossary[tlg]{common}{tld}{tdn}{Glossary}
+% \newglossary[slg]{symb}{syi}{syg}{List of Symbols}
+% todo: fix the tool glossary!!!
+% \newglossary[atg]{tools}{atd}{ato}{Auxiliary Tools Glossary}
+% \makeglossaries
+
+% \input{Latex/special-pages/glossary}
+% \input{Latex/special-pages/list_of_symbols}
+% \input{Latex/special-pages/list_of_tools}
+
+% \setcounter{tocdepth}{2}
+
+
+% Hyperref
+\usepackage{hyperref}
+% Define the color of the links
+\hypersetup{
+    colorlinks=false,
+    linkcolor=black,
+    filecolor=magenta,
+    urlcolor=blue,
+}
+
+%%* End packages section *%%
+
+%%* Pagestyle and Commands *%%
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+\newcommand{\Pg}{\par\bigskip}
+
+% \setlist[itemize,1]{after=\vskip2\baselineskip}
+\linespread{1.25}
+
+\clearpairofpagestyles
+\pagestyle{scrheadings}
+\pagenumbering{arabic}
+
+% \pagestyle{plain}
+\ihead{Hochschule München}
+\ohead{Brugger, Färber, Gerg, Münzer}
+% \cfoot{\thepage}
+% \cfoot[\pagemark]{\pagemark{} of \pageref{LastPage}}
+\cfoot[\thepage]% for pagestyle `scrplain`
+     {\thepage}% for pagestyle `scrheading`
+
+\setlength{\marginparwidth}{2cm}
+\setlength\headheight{17pt}
+\setlength{\parindent}{0pt}
+
+% When should the counter be reset?
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\numberwithin{equation}{section}
+
+%%* End of SETUP *%%
