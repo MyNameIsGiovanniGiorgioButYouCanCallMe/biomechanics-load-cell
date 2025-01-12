@@ -1,51 +1,13 @@
 
-\documentclass[11pt, titlepage, twoside]{scrartcl}
-%%Begin packages section%%
-%Sprache und Schrift
-\usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
-%Seitenformatierung%
-\usepackage{geometry}
-\usepackage{fancyhdr}
-\usepackage{lastpage}
-\geometry{
-    paper=a4paper,
-    inner=2.0cm, % Inner margin
-    outer=2.0cm, % Outer margin
-    bindingoffset=0.0cm, % Binding offset
-    top=2.0cm, % Top margin
-    bottom=2.0cm, % Bottom margin
-    %showframe,% show how the type block is set on the page
-}
-\usepackage{footnote}
-%Mathe
-\usepackage{amsmath}
-%Einbinden von Grafiken und gestalten von Tabellen
-\usepackage{graphicx}
-\usepackage{booktabs}
-% Bibliography
-\usepackage[
-    %backend=biber,
-    natbib=true,
-    style=numeric,
-    sorting=none
-]{biblatex}
-\addbibresource{Sources.bib}
-%%End packages section%%
-
-%Pagestyle und Befele
-\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
-\linespread{1.25}
-\pagestyle{fancy}
-\fancyhf{}
-
-\numberwithin{figure}{section}
-\numberwithin{table}{section}
-\numberwithin{equation}{section}
-
-\usepackage{hyperref}
+\input{setup.tex}
 
 \begin{document}
+
+%* Title Page *%
+\input{special-pages/titlepage.tex}
+\setcounter{page}{2}
+
+
 % Header and footer information
 %\setlength\headheight{15pt}
 %\fancyhead[L]{Analyse: asymetrische  Muskelbelastung im Kraftsport (Liegestützen, Kniebeugen, Klimmzüge) und Ausgleichstraining\\}
@@ -54,77 +16,75 @@
 \setlength {\marginparwidth }{2cm}
 
 
-\begin{titlepage}
-   \title{ \normalsize \textsc{Biomechanik Projektarbeit}
-         \\ [1.0cm]
-         %\includegraphics[width=40mm]{Images/HM_logo1.PNG}
-         \HRule{0.1pt} \\
-         \LARGE \textbf{
-             \uppercase{Analyse: asymmetrische  Muskelbelastung bei Kniebeugen vor und nach Ausgleichstraining\\}\\
-             %\large{Versuchsdurchführung am : }
-         }
-         \HRule{2pt} \\ [0.5cm]
-         %\normalsize  \vspace*{5\baselineskip}
-         \begin{figure*}[h!]
-               \centering
-               \includegraphics[width=0.6\textwidth]{img/Logo_hm.jpg}
-           \end{figure*}
-           }
+% \begin{titlepage}
+%    \title{ \normalsize \textsc{Biomechanik Projektarbeit}
+%          \\ [1.0cm]
+%          %\includegraphics[width=40mm]{Images/HM_logo1.PNG}
+%          \HRule{0.1pt} \\
+%          \LARGE \textbf{
+%              \uppercase{Analyse: asymmetrische  Muskelbelastung bei Kniebeugen vor und nach Ausgleichstraining\\}\\
+%              %\large{Versuchsdurchführung am : }
+%          }
+%          \HRule{2pt} \\ [0.5cm]
+%          %\normalsize  \vspace*{5\baselineskip}
+%          \begin{figure*}[h!]
+%                \centering
+%                \includegraphics[width=0.6\textwidth]{img/Logo_hm.jpg}
+%            \end{figure*}
+%            }
 
-   \date{\today}
+%    \date{\today}
 
-   \author{
-           Franziska Brugger,
-           Giorgio Faerber,
-           Maximilian Gerg,
-           Felix Muenzer
-           }
+%    \author{
+%            Franziska Brugger,
+%            Giorgio Faerber,
+%            Maximilian Gerg,
+%            Felix Muenzer
+%            }
 
 
-   \end{titlepage}
-   \maketitle
-   \tableofcontents %Hier wird das Inhaltsverzeichnis eingefügt%
-   ~\newpage
-   \setcounter{page}{1}
-   %\listofsymbols
-   \listoffigures
-   \listoftables
-   \newpage
-   %%%%%%%%%%%%%%%%%%
-   %HIER GEHT ES LOS%
-   %%%%%%%%%%%%%%%%%%
+% \end{titlepage}
+% \maketitle
+\tableofcontents %Hier wird das Inhaltsverzeichnis eingefügt%
+\listoffigures
+\listoftables
 
-   %% Speichern als content.tex%%
+\newpage
+%%%%%%%%%%%%%%%%%%
+%HIER GEHT ES LOS%
+%%%%%%%%%%%%%%%%%%
 
-   \section{Motivation}
-   \input{txt/Motivation}
+%% Speichern als content.tex%%
 
-   \section{Methodik}
-   % Projekt Ablauf (Zeitplan)
-   % Experimentelle Setups + Messung
-   \input{txt/Methodik}
+\section{Motivation}
+\input{txt/Motivation}
 
-   \section{Messinstrumente}
-   % Technische Umsetzung Wägezelle
-   % EMG-Messung
-   \input{txt/Messmittel}
+\section{Methodik}
+% % Projekt Ablauf (Zeitplan)
+% % Experimentelle Setups + Messung
+\input{txt/Methodik}
 
-   \section{Ausgleichsübungen}
-   \input{txt/Ausgleichsübungen}
+\section{Messinstrumente}
+% % Technische Umsetzung Wägezelle
+% % EMG-Messung
+\input{txt/Messmittel}
 
-   \subsection{Auswertung}
-   \input{txt/Auswertung}
+\section{Ausgleichsübungen}
+\input{txt/Ausgleichsübungen}
 
-   \section{Fazit}
-   \input{txt/Fazit}
+\section{Auswertung}
+\input{txt/Auswertung}
 
-   % \newpage
-   % \pagenumbering{roman}
-   % \section{Anhang}
-   % \input{txt/Anhang}
-   % \newpage
+\section{Fazit}
+\input{txt/Fazit}
 
-   \nocite{*}
-   \phantomsection
-   \printbibliography
-   \end{document}
+% \newpage
+% \pagenumbering{roman}
+% \section{Anhang}
+% \input{txt/Anhang}
+% \newpage
+
+% \nocite{*}
+% \phantomsection
+% \printbibliography
+\end{document}
