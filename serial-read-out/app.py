@@ -1,12 +1,16 @@
 from pathlib import Path
 import dash
-from dash import dcc, html, Input, Output, Statepy
+from dash import dcc, html, Input, Output, State
 import dash_bootstrap_components as dbc
 import plotly.graph_objs as go
 import threading
 import time
 import csv
 from datetime import datetime
+import pandas as pd  # For handling CSV files
+import base64  # For decoding the uploaded file contents
+from io import StringIO
+
 
 # Try to import serial, but handle it gracefully if it fails
 try:
@@ -28,111 +32,6 @@ N_NACHKOMMASTELLEN = 2
 
 ser = None
 connected = False
-
-
-def connect_to_serial():
-    """Try to connect to the serial port. Retry every 5 seconds if it fails."""
-    global ser, connected
-    if serial is None:
-        print("Serial module not available. Cannot connect.")
-        return
-    while True:
-        if ser and ser.is_open:
-            connected = True
-            print("Serial port is open and connected.")
-            break
-        try:
-            ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
-            if ser.is_open:
-                connected = True
-                print(f"Connected to {SERIAL_PORT}")
-                break
-        except Exception as e:
-            print(f"Failed to connect to {SERIAL_PORT}: {e}. Retrying in 5 seconds...")
-            time.sleep(5)
-
-
-# Start the serial connection in a separate thread if pyserial is available
-if serial is not None:
-    threading.Thread(target=connect_to_serial, daemon=True).start()
-
-
-def read_serial():
-    """Read data from the serial port and store it."""
-    global serial_data, data_file_path, ser, connected
-    if serial is None:
-        return  # no serial available
-
-    # Wait until connected
-    while not connected:
-        time.sleep(0.5)
-
-    print("Reading from serial...")
-    while True:
-        try:
-            if ser.in_waiting > 0:
-                # Read line from serial
-                raw_line = ser.readline()
-                if not raw_line:
-                    # No data this time, sleep and continue
-                    time.sleep(0.1)
-                    continue
-
-                # Attempt to decode and strip the line
-                line = raw_line.decode("utf-8", errors="replace").strip()
-                print(f"Raw line received: {repr(line)}")
-
-                if line == "":
-                    print("Warning: Received an empty line. Skipping.")
-                    continue
-
-                # If your Arduino sends pure numeric data:
-                # For example, if Arduino sends "12345" for a weight of 123.45 kg:
-                # We divide by 10**N_NACHKOMMASTELLEN.
-                # If the Arduino sends already in decimal form like "123.45", you might NOT need to divide.
-
-                # Try to parse a float directly
-                # If your Arduino data is something like "Weight: 123.45", you need to extract the numeric part
-                # Let's try extracting digits, decimal points, and minus sign:
-                filtered = "".join(
-                    ch for ch in line if ch.isdigit() or ch == "." or ch == "-"
-                )
-
-                if filtered == "":
-                    print(
-                        f"Warning: Could not find numeric content in line: {repr(line)}. Skipping."
-                    )
-                    continue
-
-                try:
-                    # If the Arduino already sends a proper float, consider not dividing by 10**N_NACHKOMMASTELLEN.
-                    # If Arduino sends integer representing centi-grams, for example, then dividing is correct.
-                    value = float(filtered) / (10**N_NACHKOMMASTELLEN)
-                    print(f"Parsed numeric value: {value}")
-                except ValueError:
-                    print(
-                        f"Warning: Failed to parse {repr(filtered)} as float. Skipping."
-                    )
-                    continue
-
-                timestamp = time.time()
-                serial_data.append((timestamp, value))
-
-                # Save to CSV if run started
-                if data_file_path:
-                    with data_file_path.open("a", newline="") as f:
-                        writer = csv.writer(f)
-                        writer.writerow([timestamp, value])
-            else:
-                time.sleep(0.1)
-        except Exception as e:
-            print(f"Error reading from serial: {e}")
-            time.sleep(0.5)
-
-
-if serial is not None:
-    serial_thread = threading.Thread(target=read_serial, daemon=True)
-    serial_thread.start()
 
 # Dash app layout
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
@@ -174,6 +73,30 @@ app.layout = html.Div(
             className="text-center mt-4",
         ),
         html.Div(id="run-info", className="mt-2 text-center"),
+        html.Hr(),
+        html.H2("Upload and Display CSV Data", className="text-center mt-4"),
+        dcc.Upload(
+            id="upload-data",
+            children=html.Div(
+                [
+                    "Drag and Drop or ",
+                    html.A("Select a CSV File", href="#"),
+                ]
+            ),
+            style={
+                "width": "100%",
+                "height": "60px",
+                "lineHeight": "60px",
+                "borderWidth": "1px",
+                "borderStyle": "dashed",
+                "borderRadius": "5px",
+                "textAlign": "center",
+                "margin": "10px",
+            },
+            multiple=False,
+        ),
+        html.Div(id="uploaded-file-info", className="mt-2"),
+        dcc.Graph(id="csv-data-plot", style={"height": "65vh"}),
     ],
     style={
         "padding-left": "20px",
@@ -184,70 +107,63 @@ app.layout = html.Div(
 )
 
 
-@app.callback(Output("live-plot", "figure"), Input("interval-component", "n_intervals"))
-def update_plot(n):
-    global serial_data
-    if len(serial_data) == 0:
-        # No data yet, return an empty plot
-        return go.Figure(
-            layout=go.Layout(
-                title="Live Data Plot (no data yet)",
-                xaxis_title="Time (s)",
-                yaxis_title="Value",
-                template="plotly_white",
-            )
-        )
-
-    # Limit to last SHOWN_POINTS points
-    if len(serial_data) > SHOWN_POINTS:
-        serial_data = serial_data[-SHOWN_POINTS:]
-
-    timestamps = [p[0] for p in serial_data]
-    values = [p[1] for p in serial_data]
-
-    relative_times = [t - timestamps[0] for t in timestamps]
-    figure = go.Figure(
-        data=[
-            go.Scatter(
-                x=relative_times,
-                y=values,
-                mode="lines+markers",
-                line=dict(color="royalblue"),
-                marker=dict(size=5),
-            )
-        ],
-        layout=go.Layout(
-            title="Live Data Plot",
-            xaxis_title="Time (s)",
-            yaxis_title="Value",
-            template="plotly_white",
-        ),
-    )
-    return figure
-
-
 @app.callback(
-    Output("run-info", "children"),
-    Input("new-run", "n_clicks"),
-    State("run-name", "value"),
+    Output("csv-data-plot", "figure"),
+    Output("uploaded-file-info", "children"),
+    Input("upload-data", "contents"),
+    State("upload-data", "filename"),
     prevent_initial_call=True,
 )
-def start_new_run(n_clicks, run_name):
-    global data_folder, data_file_path
+def upload_and_display_csv(contents, filename):
+    if not contents or not filename.endswith(".csv"):
+        return go.Figure(), "Invalid file. Please upload a CSV file."
 
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    folder_name = timestamp
-    if run_name:
-        folder_name += f"_{run_name.replace(' ', '_')}"
+    # Decode and parse the uploaded CSV data
+    content_type, content_string = contents.split(",")
+    decoded = base64.b64decode(content_string)
+    try:
+        df = pd.read_csv(StringIO(decoded.decode("utf-8")))
 
-    data_folder = Path("data") / folder_name
-    data_folder.mkdir(parents=True, exist_ok=True)
+        # Ensure the CSV has the expected columns
+        if not {"Unix Timestamp", "Position", "Value [kg]"}.issubset(df.columns):
+            return (
+                go.Figure(),
+                "CSV file must contain 'Unix Timestamp', 'Position', and 'Value [kg]' columns.",
+            )
 
-    data_file_path = data_folder / f"serial_data_{timestamp}.csv"
-    with data_file_path.open("w", newline="") as f:
-        writer = csv.writer(f)
-        writer.writerow(["Unix Timestamp", "Value"])
+        # Prepare data for plotting
+        left_values = df[df["Position"] == "Left"]
+        right_values = df[df["Position"] == "Right"]
+
+        figure = go.Figure(
+            data=[
+                go.Scatter(
+                    x=left_values["Unix Timestamp"],
+                    y=left_values["Value [kg]"],
+                    mode="lines+markers",
+                    name="Left",
+                    line=dict(color="blue"),
+                ),
+                go.Scatter(
+                    x=right_values["Unix Timestamp"],
+                    y=right_values["Value [kg]"],
+                    mode="lines+markers",
+                    name="Right",
+                    line=dict(color="red"),
+                ),
+            ],
+            layout=go.Layout(
+                title="Uploaded CSV Data",
+                xaxis_title="Unix Timestamp",
+                yaxis_title="Value [kg]",
+                template="plotly_white",
+            ),
+        )
+        return figure, f"Uploaded file: {filename}"
+
+    except Exception as e:
+        return go.Figure(), f"Error processing file: {e}"
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=False)

@@ -1,0 +1,48 @@
+
+\documentclass[11pt, titlepage, twoside]{scrartcl}
+%%Begin packages section%%
+%Sprache und Schrift
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%Seitenformatierung%
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\geometry{
+    paper=a4paper,
+    inner=2.0cm, % Inner margin
+    outer=2.0cm, % Outer margin
+    bindingoffset=0.0cm, % Binding offset
+    top=2.0cm, % Top margin
+    bottom=2.0cm, % Bottom margin
+    %showframe,% show how the type block is set on the page
+}
+\usepackage{footnote}
+%Mathe
+\usepackage{amsmath}
+%Einbinden von Grafiken und gestalten von Tabellen
+\usepackage{graphicx}
+\usepackage{booktabs}
+% Bibliography
+\usepackage[
+    %backend=biber,
+    natbib=true,
+    style=numeric,
+    sorting=none
+]{biblatex}
+\addbibresource{Sources.bib}
+%%End packages section%%
+
+%Pagestyle und Befele
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+\linespread{1.25}
+\pagestyle{fancy}
+\fancyhf{}
+
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\numberwithin{equation}{section}
+
+\usepackage{hyperref}
+
+

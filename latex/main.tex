@@ -1,0 +1,84 @@
+\input{config}
+\begin{document}
+% Header and footer information
+%\setlength\headheight{15pt}
+%\fancyhead[L]{Analyse: asymetrische  Muskelbelastung im Kraftsport (Liegestützen, Kniebeugen, Klimmzüge) und Ausgleichstraining\\}
+%\fancyhead[R]{Franziska Brugger, Giorgio Faerber, Maximilian Gerg, Felix Muenzer}
+\fancyfoot[C]{\thepage}
+\setlength {\marginparwidth }{2cm}
+
+
+\begin{titlepage}
+   \title{ \normalsize \textsc{Biomechanik Projektarbeit}
+         \\ [1.0cm]
+         %\includegraphics[width=40mm]{Images/HM_logo1.PNG}
+         \HRule{0.1pt} \\
+         \LARGE \textbf{
+             \uppercase{Analyse: asymmetrische  Muskelbelastung bei Kniebeugen vor und nach Ausgleichstraining\\}\\
+             %\large{Versuchsdurchführung am : }
+         }
+         \HRule{2pt} \\ [0.5cm]
+         %\normalsize  \vspace*{5\baselineskip}
+         \begin{figure*}[h!]
+               \centering
+               \includegraphics[width=0.6\textwidth]{img/Logo_hm.jpg}
+           \end{figure*}
+           }
+
+   \date{\today}
+
+   \author{
+           Franziska Brugger,
+           Giorgio Faerber,
+           Maximilian Gerg,
+           Felix Muenzer
+           }
+
+
+   \end{titlepage}
+   \maketitle
+   \tableofcontents %Hier wird das Inhaltsverzeichnis eingefügt%
+   \newpage
+   \setcounter{page}{1}
+   %\listofsymbols
+   \listoffigures
+   \listoftables
+   \newpage
+   %%%%%%%%%%%%%%%%%%
+   %HIER GEHT ES LOS%
+   %%%%%%%%%%%%%%%%%%
+
+   %% Speichern als content.tex%%
+
+   \section{Motivation}
+   \input{txt/Motivation}
+
+   \section{Methodik}
+   % Projekt Ablauf (Zeitplan)
+   % Experimentelle Setups + Messung
+   \input{txt/methodik}
+
+   \section{Messinstrumente}
+   % Technische Umsetzung Wägezelle
+   % EMG-Messung
+   \input{txt/Messmittel}
+
+   \section{Ausgleichsübungen}
+   \input{txt/Ausgleichsübungen}
+
+   \subsection{Auswertung}
+   \input{txt/Auswertung}
+
+   \section{Fazit}
+   \input{txt/Fazit}
+
+   \newpage
+   \pagenumbering{roman}
+   \section{Anhang}
+   \input{txt/Anhang}
+   \newpage
+
+   \nocite{*}
+   \phantomsection
+   \printbibliography
+   \end{document}
