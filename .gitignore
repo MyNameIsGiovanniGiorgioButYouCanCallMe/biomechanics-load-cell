@@ -52,6 +52,6 @@ Mkfile.old
 dkms.conf
 
 # Latex
-main.*
-!main.tex
-!main.pdf
+latex/main.*
+!latex/main.tex
+!latex/main.pdf
