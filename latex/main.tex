@@ -1,4 +1,50 @@
-\input{config}
+
+\documentclass[11pt, titlepage, twoside]{scrartcl}
+%%Begin packages section%%
+%Sprache und Schrift
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%Seitenformatierung%
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\geometry{
+    paper=a4paper,
+    inner=2.0cm, % Inner margin
+    outer=2.0cm, % Outer margin
+    bindingoffset=0.0cm, % Binding offset
+    top=2.0cm, % Top margin
+    bottom=2.0cm, % Bottom margin
+    %showframe,% show how the type block is set on the page
+}
+\usepackage{footnote}
+%Mathe
+\usepackage{amsmath}
+%Einbinden von Grafiken und gestalten von Tabellen
+\usepackage{graphicx}
+\usepackage{booktabs}
+% Bibliography
+\usepackage[
+    %backend=biber,
+    natbib=true,
+    style=numeric,
+    sorting=none
+]{biblatex}
+\addbibresource{Sources.bib}
+%%End packages section%%
+
+%Pagestyle und Befele
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+\linespread{1.25}
+\pagestyle{fancy}
+\fancyhf{}
+
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\numberwithin{equation}{section}
+
+\usepackage{hyperref}
+
 \begin{document}
 % Header and footer information
 %\setlength\headheight{15pt}
@@ -38,7 +84,7 @@
    \end{titlepage}
    \maketitle
    \tableofcontents %Hier wird das Inhaltsverzeichnis eingefügt%
-   \newpage
+   ~\newpage
    \setcounter{page}{1}
    %\listofsymbols
    \listoffigures
@@ -53,24 +99,24 @@
    \section{Motivation}
    \input{txt/Motivation}
 
-   % \section{Methodik}
-   % % Projekt Ablauf (Zeitplan)
-   % % Experimentelle Setups + Messung
-   % \input{txt/Methodik}
+   \section{Methodik}
+   % Projekt Ablauf (Zeitplan)
+   % Experimentelle Setups + Messung
+   \input{txt/Methodik}
 
-   % \section{Messinstrumente}
-   % % Technische Umsetzung Wägezelle
-   % % EMG-Messung
-   % \input{txt/Messmittel}
+   \section{Messinstrumente}
+   % Technische Umsetzung Wägezelle
+   % EMG-Messung
+   \input{txt/Messmittel}
 
-   % \section{Ausgleichsübungen}
-   % \input{txt/Ausgleichsübungen}
+   \section{Ausgleichsübungen}
+   \input{txt/Ausgleichsübungen}
 
-   % \subsection{Auswertung}
-   % \input{txt/Auswertung}
+   \subsection{Auswertung}
+   \input{txt/Auswertung}
 
-   % \section{Fazit}
-   % \input{txt/Fazit}
+   \section{Fazit}
+   \input{txt/Fazit}
 
    % \newpage
    % \pagenumbering{roman}

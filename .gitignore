@@ -50,3 +50,8 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Latex
+main.*
+!main.tex
+!main.pdf
