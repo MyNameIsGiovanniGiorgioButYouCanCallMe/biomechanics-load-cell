@@ -4,14 +4,12 @@ Wägezellen messen mechanische Verformungen.
 Wird auf eine Wägezelle eine Gewichtskraft \mbox{$F = m \cdot g \: [\frac{kg \cdot m}{s^2}]$} (m = aufgebrachte Masse und $g = 9.81 \: \frac{m}{s^2}$)  aufgebracht, verformt sich diese unter der Krafteinwirkung.
 Auf der Wägezelle sind Dehnungsmessstreifen aufgebracht, deren Widerstand sich bei Verformung ändert.
 Die Dehnungsmessstreifen sind in einer Wheatstone-Brücke verschaltet, die die Widerstandsänderung in eine Spannungsänderung umwandelt, die meist nur im Bereich weniger Millivolt liegt.
-Diese Spannungsänderung ist proportional zu aufgebrachten Gewichtskraft.\\
-\\
-In diesem Versuch wird eine Wägezelle mit dem Wägesensor HX711 eingesetzt.
-Der Sensor HX711 ist ein Analog-Digital-Wandler, der die analogen Spannungsänderungen der Wheatstone-Brücke verstärkt und in ein digitales Signal umwandelt.
-Dieses digitale Signal kann dann von einem Mikrocontroller verarbeitet werden.
-In diesem Projekt wird der Arduino Nano verwendet. \\
-\begin{center}
+Diese Spannungsänderung ist proportional zur aufgebrachten Gewichtskraft. Unten dargestellt in \autoref{CAD Darstellung Wägezelle} ist der Aufbau einer Wägezelle als CAD-Modell. \\
+\begin{figure}
     \centering
+    \includegraphics[width=0.9\textwidth]{img/CAD Wägezelle.png}
+    \captionof{figure}{CAD Darstellung Wägezelle}\label{CAD Darstellung Wägezelle}
+\end{center}
     \includegraphics[width=0.9\textwidth]{img/Nano-Pinlayout.png}
     \captionof{figure}[Nano-Pinlayout ]{Nano-Pinlayout \cite{Arduino}}\label{Nano-Pinlayout}
 \end{center}
@@ -87,6 +85,12 @@ Sie können nun beliebig aufbereitet und analysiert werden.
 Mit einem EMG kann die elektrische Muskel-Aktivität gemessen werden.
 
 Dazu wird die elektrische Aktivität in einem ruhenden und einem kontrahierten Muskel gemessen. Das Signal entsteht aus dem Aktionspotential der Muskelfasermembran und dem Depolarisations- und Repolarisationsverlauf, der in \autoref{Depolarisations- und Repolarisationsverlauf} als Funktion der Zeit dargestellt ist. Im Ruhetonus liegt das Potential zwischen $-80$ und  $-90$ mV.
+
+\begin{center}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/De- Repolarisation.PNG}
+    \captionof{figure}[De- und Repolarisation und Aktionspotential Muskelfasermembran]{De- und Repolarisation und Aktionspotential Muskelfasermembran \cite{Vorlesung-Muskulatur-EMG}}\label{Depolarisations- und Repolarisationsverlauf}
+\end{center}
 \begin{figure}[h!]
       \centering
       \includegraphics[width=0.8\textwidth]{img/De- Repolarisation.PNG}
@@ -100,7 +104,7 @@ Dazu wird die elektrische Aktivität in einem ruhenden und einem kontrahierten M
 %     \label{fig:depolarisations-und-repolarisationsverlauf}
 % \end{center}
 
-Eine Muskelontraktion startet auf Sarkomerebene. Durch das Zusammenwirken aller Sarkomere wird die Umwandlung von chemischer Energie in mechanische Energie als Kontraktion des Muskels sichtbar.\\
+Eine Muskelkontraktion startet auf Sarkomerebene. Durch das Zusammenwirken aller Sarkomere wird die Umwandlung von chemischer Energie in mechanische Energie als Kontraktion des Muskels sichtbar.\\
 \\
 Ein  Nervenimpuls gelangt als Aktionspotential über das Axon eines Motoneurons zum Axonende. \\
 Durch Neurotransmitter die in den postsynaptischen Spalt ausgeschüttet und dann an den Rezeptor der postsynaptischen Membran binden, wird der Prozess der Depolarisation in der Muskelfaser ausgelöst, der auf der linken Seite von  \autoref{fig:depolarisations-und-repolarisationsverlauf} dargestellt ist:\\
