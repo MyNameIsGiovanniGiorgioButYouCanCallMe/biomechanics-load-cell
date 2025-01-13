@@ -160,21 +160,22 @@ plt.cla()
 # plt.show()
 
 
-time_span = range(Person[NAME]["Start"], Person[NAME]["Ende"])
-differenz = [vals_left[i] - vals_right[i] for i in time_span]
+# time_span = range(Person[NAME]["Start"], Person[NAME]["Ende"])
+differenz = [vals_left[i] - vals_right[i] for i in range(min_length)]
+integral_differenz = list(np.trapz(differenz, range(min_length)))
 
 
 plt.figure(figsize=(10, 4))
 # plt.plot(common_times, combined_weight, marker="o", markersize=2, color="green", label="Summe")
-plt.plot(time_span, differenz, marker="o", markersize=2, color="red", label="Differenz")
+plt.plot(common_times, integral_differenz, marker="o", markersize=2, color="red", label="Differenz")
 # plt.plot(common_times, right, marker="o", markersize=2, color="red")
-plt.title("Summe von Links und Rechts")
+plt.title("Integral der Differenz von Links und Rechts")
 plt.xlabel("Zeit [s] (relativ zum ersten Messwert)")
 plt.ylabel("Kraft [kg]")
 plt.grid(True)
 plt.tight_layout()
-plt.savefig(IMG_PATH / f"Summe Links Rechts - {NAME}.png")
-plt.show()
+plt.savefig(IMG_PATH / f"Integral der Differenz - {NAME}.png")
+# plt.show()
 plt.cla()
 
 print(f"Plots for {DATA_PATH} have been created")
