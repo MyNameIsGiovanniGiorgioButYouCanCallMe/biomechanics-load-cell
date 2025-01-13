@@ -39,15 +39,15 @@ Die durchschnittlichen Symmetrie-Index-Werte der drei analysierten Muskeln (Rect
     \item Rectus femoris
     Der durchschnittliche Symmetrie-Index hat sich von 18.06 $\%$ auf 13.18 $\%$ verbessert.
     Bei allen drei Probanden wurde eine Verbesserung festgestellt.
-    \textbf{"Interpretation:"} Die Ausgleichsübungen waren für diesen Muskel besonders effektiv, da die Symmetrie deutlich zugenommen hat.
+    \textbf{Interpretation:} Die Ausgleichsübungen waren für diesen Muskel besonders effektiv, da die Symmetrie deutlich zugenommen hat.
     \item Vastus lateralis
     Der Symmetrie-Index hat sich von 24.24 $\%$ auf 18.70 $\%$ verbessert.
     Auch hier zeigten alle drei Probanden Verbesserungen.
-    \textbf{"Interpretation:"} Der Vastus lateralis war vor den Übungen der asymmetrischste Muskel, aber die Übungen haben die Symmetrie erfolgreich gesteigert.
+    \textbf{Interpretation:} Der Vastus lateralis war vor den Übungen der asymmetrischste Muskel, aber die Übungen haben die Symmetrie erfolgreich gesteigert.
     \item Vastus medialis
     Der Symmetrie-Index hat sich von 17.84 $\%$ auf 15.05 $\%$ verbessert.
     Bei allen drei Probanden wurde eine Verbesserung festgestellt.
-    \textbf{"Interpretation:"} Die Verbesserungen sind weniger ausgeprägt im Vergleich zu den anderen Muskeln, was darauf hinweist, dass der Muskel bereits eine bessere Ausgangssymmetrie hatte.
+    \textbf{Interpretation:} Die Verbesserungen sind weniger ausgeprägt im Vergleich zu den anderen Muskeln, was darauf hinweist, dass der Muskel bereits eine bessere Ausgangssymmetrie hatte.
 \end{itemize}
 
 \subsubsection{Ergebnisse der EMG Messungen}
@@ -84,15 +84,26 @@ Auch wenn bei diesem Datensatz durchgängig Verbesserungen festgestellt wurden, 
 
 \subsection{Auswertung der Wägezelle}
 \subsubsection{Quantisierung der Gewichtsverteilung}
-% Kalibration der Wägezelle?
+% Kalibrierung der Wägezelle?
 Die aus der Wägezelle übertragenen Gewichtsdaten der linken und rechten Seite sollen nun beschreiben wie sehr die linke oder rechte Seite beansprucht werden.
 Da die EMG Messungen nicht gleichzeitig mit den Wägezellen Messungen durchgeführt wurden, können die Daten nicht direkt miteinander verglichen werden.
-Um dennoch Erkenntnisse aus den Wägezellen Daten zu gewinnen, wurden folgende Überlegungen gemacht:
+Um dennoch Erkenntnisse aus den Wägezellen Daten zu gewinnen, sind folgende Überlegungen angestellt worden:
 \begin{itemize}
   \item Die Phase in der sich die Person auf die Waage stellt und in der sie wieder absteigt wird für die Auswertung nicht berücksichtigt.
   \item Ein über die Zeit verteilt deutliche höheres Gewicht auf einer Seite entspricht einer stärkeren Belastung dieser Seite.
-  \item ...
+  \item Mathematische Aufbereitung der Rohdaten: 
+    \item[$\cdot$] $m_{links} - m_{rechts} =$ Differenz zwischen Masse links und Masse rechts über die Zeit, zeigt Momentanwerte (dargestellt ist \autoref{fig: Differenz - Any})
+    \item[$\cdot$] Integral über \autoref{Differenz - Any} ist der kumulative Unterschied der Gewichtsbelastung zwischen links und rechts, zeigt Langzeit-Asymmetrie (dargestellt in \autoref{fig:weight_distribution_integral_any})
+    \item[$\cdot$] positiver Wert des Integrals $=$ höhere Belastung der linken Seite
+    \item[$\cdot$] negativer Wert des Integrals $=$ höhere Belastung der rechten Seite 
 \end{itemize}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\linewidth]{img/pyplots/Differenz - Any.png}\\
+  \caption{Differenz der Gewichtsverteilung von Any}
+  \label{fig: Differenz - Any}
+\end{figure}
 
 % \begin{align}
 %   \int \Delta m(t) ~dt &\approx \sum_{i=1}^{n} \Delta m_i \cdot \Delta t_i
@@ -107,6 +118,6 @@ Um dennoch Erkenntnisse aus den Wägezellen Daten zu gewinnen, wurden folgende �
   \label{fig:weight_distribution_integral_any}
 \end{figure}
 
-In \autoref{fig:weight_distribution_integral_any} kann man eine deutliche Tendenz
+In \autoref{fig:weight_distribution_integral_any} kann eine deutliche Tendenz 
 
 
