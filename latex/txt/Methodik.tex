@@ -1,3 +1,17 @@
+\subsection{Zeitlicher Ablauf des Gesamtversuchs}
+Der Versuch ist so aufgebaut, dass bei der ersten Messung die links- und rechtseitige Belastung der Probanden bei einer Kniebeuge im untrainierten Zustand mit einem EMG gemessen werden. 
+Dann haben die Probanden für vier Wochen drei spezifisch ausgewählte Ausgleichsübungen trainiert, die mögliche Ungleichgewichte ausgleichen sollen. 
+Nach vier Wochen findet eine zweite Messung statt. Die analog zur ersten Messung abläuft. Bei der zweiten Messung wurden als zusätzliche Messinstrumente zwei Wägezellen eingesetzt. 
+Nach der zweiten Messung erfolgt die Auswertung der Ergebnisse. 
+Der Ablauf ist in \autoref{fig: Ablauf-gesamtversuch} dargestellt. 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/Ablauf-gesamtversuch.jpeg}
+    \caption{Zeitlicher Ablauf Versuch}
+    \label{fig: Ablauf-gesamtversuch}
+\end{figure}
+\\
+\\ 
 \subsection{Wägezelle}
 In diesem Versuch werden Wägezellen eingesetzt um etwaige Ungleichgewichte beim Ausführen einer Kniebeuge zu messen.
 Hierzu stellt sich der Proband auf zwei Wägezellen und führt eine Kniebeuge aus, die Wägezellen messen während dessen die auf ihnen lastende Gewichtskraft.
@@ -5,7 +19,7 @@ Wird eine Seite während der Kniebeuge stärker belastet, sollte die jeweilige W
 An die Wägezelle ist der Wägesensor HX711 angeschlossen, der in \autoref{fig:HX711} dargestellt ist.
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.6\textwidth]{img/HX711.png}
+    \includegraphics[width=0.3\textwidth]{img/HX711.png}
     \caption{HX711 \cite{prilchen}}
     \label{fig:HX711}
 \end{figure}
@@ -14,11 +28,11 @@ Dieses digitale Signal kann dann von einem Mikrocontroller verarbeitet werden.
 In diesem Projekt wird der Arduino Nano verwendet wie in \autoref{fig:Nano-Pinlayout} dargestellt.
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.9\textwidth]{img/Nano-Pinlayout.png}
+    \includegraphics[width=0.8\textwidth]{img/Nano-Pinlayout.png}
     \caption{Nano-Pinlayout \cite{Arduino}}
     \label{fig:Nano-Pinlayout}
 \end{figure}
-Um den Aufbau verwenden zu können müssen alle komponenten miteindander richtig verschaltet sein und kommunizieren.
+Um den Aufbau verwenden zu können müssen alle Komponenten richtig miteindander verschaltet sein und kommunizieren.
 Dafür wird die Wägezelle an eine 5 V Gleichstromquelle angeschlossen und mit dem HX711 verbunden.
 Die Wägezelle kann so die analogen Signale an den HX711 weitergeben.
 Der HX711 wandelt sie in ein digitales Signal um und gibt dieses an den Arduino Nano weiter.
@@ -80,11 +94,12 @@ Sie können nun beliebig aufbereitet und analysiert werden.
 % Soll ein Messwert ausgegeben werden, so werden die Daten an den Serial-Port ausgegeben, mit dem Hinweis, ob der Messwert von links oder rechts stammt.
 % An dem Serial-Port angekommen werden die Daten von einem zweiten parallel laufenden Python Skript ausgewertet.
 % Dabei können die Daten in Echtzeit in einer web App dargestellt werden und werden gleichzeitig aufgezeichnet im CSV-Format.
-Diese Daten können nun auf verschiedene Art und Weisen mithilfe von Python dargestellt werden.
+Diese Daten können nun auf verschiedene Art und Weisen mithilfe von Python dargestellt werden.\\
+\\
 \subsection{EMG Messung}
 Im Rahmen des Messversuchsaufbaus, dargestellt in \autoref{fig:EMG-Messaufbau} wurde zunächst sichergestellt, dass die Probanden eine reproduzierbare Ausgangsposition für die Kniebeuge einnehmen konnten.
 Hierzu wurden die Fußumrisse jedes Probanden auf einem großen Papier aufgezeichnet.
-Dies diente als Orientierungshilfe, um die Standposition exakt wiederherstellen zu können.
+Dies diente als Orientierungshilfe, um die Standposition für die zweite Messung exakt wiederherstellen zu können.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\linewidth]{img/Aufbau-EMG.png}
