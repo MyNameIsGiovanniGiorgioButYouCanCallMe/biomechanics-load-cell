@@ -6,9 +6,9 @@ from pathlib import Path
 
 IMG_PATH = Path(__file__).parents[1] / "serial-read-out" / "img"
 
-DATA_PATH = Path(__file__).parents[1] / "serial-read-out" / "data" / "serial_data_Any.csv"
+DATA_PATH = Path(__file__).parents[1] / "serial-read-out" / "data" / "serial_data_Lehnuebungen.csv"
 
-NAME = "Any"
+NAME = "Lehnuebungen"
 
 Person = {
     "Any":{
@@ -31,6 +31,11 @@ Person = {
         "Start": 13,
         "Ende": 38
     },
+    "Lehnuebungen":{
+        "weight": 1,
+        "Start": 0,
+        "Ende": 59
+    }
 
 }
 
@@ -162,16 +167,23 @@ plt.cla()
 
 # time_span = range(Person[NAME]["Start"], Person[NAME]["Ende"])
 differenz = [vals_left[i] - vals_right[i] for i in range(min_length)]
-integral_differenz = list(np.trapz(differenz, range(min_length)))
+integral_differenz = [sum(differenz[:i]) for i in range(min_length)]
+
+start_idx = next(i for i, t in enumerate(common_times) if t >= Person[NAME]["Start"])
+end_idx = next(i for i, t in enumerate(common_times) if t > Person[NAME]["Ende"])
+
+personal_adjusted_time = common_times[start_idx:end_idx]
+personal_adjusted_difference = difference[start_idx:end_idx]
+personal_adjusted_integral_difference = np.cumsum(personal_adjusted_difference)
 
 
 plt.figure(figsize=(10, 4))
 # plt.plot(common_times, combined_weight, marker="o", markersize=2, color="green", label="Summe")
-plt.plot(common_times, integral_differenz, marker="o", markersize=2, color="red", label="Differenz")
+plt.plot(personal_adjusted_time, personal_adjusted_integral_difference, marker="o", markersize=2, color="red", label="Differenz")
 # plt.plot(common_times, right, marker="o", markersize=2, color="red")
 plt.title("Integral der Differenz von Links und Rechts")
 plt.xlabel("Zeit [s] (relativ zum ersten Messwert)")
-plt.ylabel("Kraft [kg]")
+plt.ylabel("Integral der Masse über die Zeit [kg $\cdot$ s]")
 plt.grid(True)
 plt.tight_layout()
 plt.savefig(IMG_PATH / f"Integral der Differenz - {NAME}.png")

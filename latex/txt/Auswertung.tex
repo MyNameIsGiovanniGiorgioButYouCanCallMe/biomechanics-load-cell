@@ -50,7 +50,7 @@ Die durchschnittlichen Symmetrie-Index-Werte der drei analysierten Muskeln (Rect
     \textbf{"Interpretation:"} Die Verbesserungen sind weniger ausgeprägt im Vergleich zu den anderen Muskeln, was darauf hinweist, dass der Muskel bereits eine bessere Ausgangssymmetrie hatte.
 \end{itemize}
 
-\subsection{Ergebnis EMG}
+\subsubsection{Ergebnisse der EMG Messungen}
 \begin{itemize}
     \item Die Ausgleichsübungen führten bei 3 von 4 Probanden zu einer Verbesserung der Symmetrie.
     \item Besonders der Rectus femoris und der Vastus lateralis profitierten von den Übungen, da bei ihnen die Asymmetrien am stärksten reduziert wurden.
@@ -80,4 +80,33 @@ Auch wenn bei diesem Datensatz durchgängig Verbesserungen festgestellt wurden, 
     \item 5. Lerneffekt:\\
     Die Verbesserungen könnten nicht auf die Übungen, sondern auf eine bessere Koordination der Probanden während der Messungen (Übungseffekt) zurückzuführen sein.
 \end{itemize}
+
+
+\subsection{Auswertung der Wägezelle}
+\subsubsection{Quantisierung der Gewichtsverteilung}
+% Kalibration der Wägezelle?
+Die aus der Wägezelle übertragenen Gewichtsdaten der linken und rechten Seite sollen nun beschreiben wie sehr die linke oder rechte Seite beansprucht werden.
+Da die EMG Messungen nicht gleichzeitig mit den Wägezellen Messungen durchgeführt wurden, können die Daten nicht direkt miteinander verglichen werden.
+Um dennoch Erkenntnisse aus den Wägezellen Daten zu gewinnen, wurden folgende Überlegungen gemacht:
+\begin{itemize}
+  \item Die Phase in der sich die Person auf die Waage stellt und in der sie wieder absteigt wird für die Auswertung nicht berücksichtigt.
+  \item Ein über die Zeit verteilt deutliche höheres Gewicht auf einer Seite entspricht einer stärkeren Belastung dieser Seite.
+  \item ...
+\end{itemize}
+
+% \begin{align}
+%   \int \Delta m(t) ~dt &\approx \sum_{i=1}^{n} \Delta m_i \cdot \Delta t_i
+%   \label{eq:integral_differenz} \\
+%   %
+% \end{align}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\linewidth]{img/pyplots/Integral der Differenz - Any.png}\\
+  \caption{Integral der Differenz der Gewichtsverteilung von Any}
+  \label{fig:weight_distribution_integral_any}
+\end{figure}
+
+In \autoref{fig:weight_distribution_integral_any} kann man eine deutliche Tendenz
+
 
