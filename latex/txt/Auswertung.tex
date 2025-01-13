@@ -5,14 +5,14 @@ Die von der Wägezelle übertragenen Gewichtsdaten der linken und rechten Seite 
 Da die EMG Messungen nicht gleichzeitig mit den Wägezellen Messungen durchgeführt wurden, können die Daten nicht direkt miteinander verglichen werden.
 Um dennoch Erkenntnisse aus den Wägezellen Daten zu gewinnen, sind folgende Überlegungen angestellt worden:
 \begin{itemize}
-  \item Die Phase in der die Person auf die Waage tritt und in der sie wieder absteigt wird für die Auswertung nicht berücksichtigt. 
-  In \autoref{fig: Differenz - Any} sind diese Phasen an den negativen und positiven Peaks am Anfang und am Ende des Graphen zu erkennen. 
+  \item Die Phase in der die Person auf die Waage tritt und in der sie wieder absteigt wird für die Auswertung nicht berücksichtigt.
+  In \autoref{fig: Differenz - Any} sind diese Phasen an den negativen und positiven Peaks am Anfang und am Ende des Graphen zu erkennen.
   \item Ein über die Zeit verteilt deutliche höheres Gewicht auf einer Seite entspricht einer stärkeren Belastung dieser Seite.
-  \item Mathematische Aufbereitung der Rohdaten: 
+  \item Mathematische Aufbereitung der Rohdaten:
     \item[$\cdot$] $m_{links} - m_{rechts} =$ Differenz zwischen Masse links und Masse rechts über die Zeit, zeigt Momentanwerte (dargestellt ist \autoref{fig: Differenz - Any})
     \item[$\cdot$] Integral über \autoref{fig: Differenz - Any} ist der kumulative Unterschied der Gewichtsbelastung zwischen links und rechts, zeigt Langzeit-Asymmetrie (dargestellt in \autoref{fig:weight_distribution_integral_any})
     \item[$\cdot$] positiver Wert des Integrals $\rightarrow$ höhere Belastung der linken Seite
-    \item[$\cdot$] negativer Wert des Integrals $\rightarrow$ höhere Belastung der rechten Seite 
+    \item[$\cdot$] negativer Wert des Integrals $\rightarrow$ höhere Belastung der rechten Seite
 \end{itemize}
 
 \begin{figure}
@@ -36,25 +36,25 @@ Um dennoch Erkenntnisse aus den Wägezellen Daten zu gewinnen, sind folgende Üb
 \end{figure}
 Der in \autoref{fig:weight_distribution_integral_any} dargestellte Graph zeigt einen kontinuierlichen Anstieg, was einer stärkeren Belastung der linken Seite über den betrachteten Zeitraum entspricht. \\
 \\
-Der in \autoref{fig:weight_distribution_integral_giorgio} dargestellte Verlauf liegt zum großen Teil unterhalb der Nulllinie, was bedeutet, dass die rechte Seite kumulativ mehr Gewicht getragen hat als die linke. 
-Zwischen 30 und 40 Sekunden steigt der Graph einmal deutlich an und fällt ab ca. Sekunde 37 wieder ab, was auf einen Ausgleichsversuch hindeuten könnte. Die Gewichtsverteilung bleibt aber rechtslastig. 
+Der in \autoref{fig:weight_distribution_integral_giorgio} dargestellte Verlauf liegt zum großen Teil unterhalb der Nulllinie, was bedeutet, dass die rechte Seite kumulativ mehr Gewicht getragen hat als die linke.
+Zwischen 30 und 40 Sekunden steigt der Graph einmal deutlich an und fällt ab ca. Sekunde 37 wieder ab, was auf einen Ausgleichsversuch hindeuten könnte. Die Gewichtsverteilung bleibt aber rechtslastig.
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\linewidth]{img/pyplots/Integral der Differenz - Giorgio.png.png}\\
+  \includegraphics[width=0.7\linewidth]{img/pyplots/Integral der Differenz - Giorgio.png}\\
   \caption{Integral der Differenz der Gewichtsverteilung von Giorgio}
   \label{fig:weight_distribution_integral_giorgio}
 \end{figure}
-Auch der in \autoref{fig:weight_distribution_integral_max} dargestellte Graph zeigt eine negtaive Tendenz und somit eine starke rechtsseitige Belastung. Der wellenartige Verlauf könnten Korrekturversuch sein, trotzdem wird die rechtsseitige Belastung stetig größer.  
+Auch der in \autoref{fig:weight_distribution_integral_max} dargestellte Graph zeigt eine negtaive Tendenz und somit eine starke rechtsseitige Belastung. Der wellenartige Verlauf könnten Korrekturversuch sein, trotzdem wird die rechtsseitige Belastung stetig größer.
 \begin{figure}
   \centering
   \includegraphics[width=0.7\linewidth]{img/pyplots/Integral der Differenz - Max.png}\\
   \caption{Integral der Differenz der Gewichtsverteilung von Max}
   \label{fig:weight_distribution_integral_max}
 \end{figure}
-Einen sehr auffälligen Verlauf zeigt der letzte Graph \autoref{fig:weight_distribution_integral_felix}. 
-Das Integral steigt kontinuierlich über den gesamten Zeitraum. 
-Es gibt kaum wellenartige Schwankungen, was darauf hinweist das die linke Seite durchgehend stärker belastet wird als die rechte und scheinbar keine Korrekturversuche stattfanden. 
-Die Gewichtsverlagerung ist zwar stabil, aber sehr einseitig. 
+Einen sehr auffälligen Verlauf zeigt der letzte Graph \autoref{fig:weight_distribution_integral_felix}.
+Das Integral steigt kontinuierlich über den gesamten Zeitraum.
+Es gibt kaum wellenartige Schwankungen, was darauf hinweist das die linke Seite durchgehend stärker belastet wird als die rechte und scheinbar keine Korrekturversuche stattfanden.
+Die Gewichtsverlagerung ist zwar stabil, aber sehr einseitig.
 \begin{figure}
   \centering
   \includegraphics[width=0.7\linewidth]{img/pyplots/Integral der Differenz - Felix.png}\\
@@ -63,7 +63,7 @@ Die Gewichtsverlagerung ist zwar stabil, aber sehr einseitig.
 \end{figure}
 \\
 \\
-Was auffällt ist, dass in den Rohdaten die sechs einzelnen Kniebeugen nicht voneinander unterscheidbar sind. 
+Was auffällt ist, dass in den Rohdaten die sechs einzelnen Kniebeugen nicht voneinander unterscheidbar sind.
 Für zukünftige Messungen wäre es daher zu empfehlen, pro Kniebeuge nur einen Graphen zu erstellen, so dass die Fehlbelastungen besser mit dem einzelnen Bewegungsablauf in Einklang gebracht werden können.\\
 \\
 Trotzdem hat die Auswertung und mathematische Aufbereitung der Daten der Wägezellen sinnvolle Ergebnisse erbracht. Und kann für auch für zukünftige Auswertungen angepasst werden. \\
