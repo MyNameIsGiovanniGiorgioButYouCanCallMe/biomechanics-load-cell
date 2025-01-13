@@ -1,11 +1,12 @@
 \subsection{Auswertung Wägezellen}
 \subsubsection{Quantisierung der Gewichtsverteilung}
 % Kalibrierung der Wägezelle?
-Die von der Wägezelle übertragenen Gewichtsdaten der linken und rechten Seite sollen beschreiben wie sehr die jeweilige Seite beansprucht wird.
+Die von der Wägezelle übertragenen Gewichtsdaten der linken und rechten Seite sollen beschreiben wie sehr die jeweilige Seite belastet wird.
 Da die EMG Messungen nicht gleichzeitig mit den Wägezellen Messungen durchgeführt wurden, können die Daten nicht direkt miteinander verglichen werden.
 Um dennoch Erkenntnisse aus den Wägezellen Daten zu gewinnen, sind folgende Überlegungen angestellt worden:
 \begin{itemize}
-  \item Die Phase in der die Person auf die Waage tritt und in der sie wieder absteigt wird für die Auswertung nicht berücksichtigt.
+  \item Die Phase in der die Person auf die Waage tritt und in der sie wieder absteigt wird für die Auswertung nicht berücksichtigt. 
+  In \autoref{fig: Differenz - Any} sind diese Phasen an den negativen und positiven Peaks am Anfang und am Ende des Graphen zu erkennen. 
   \item Ein über die Zeit verteilt deutliche höheres Gewicht auf einer Seite entspricht einer stärkeren Belastung dieser Seite.
   \item Mathematische Aufbereitung der Rohdaten: 
     \item[$\cdot$] $m_{links} - m_{rechts} =$ Differenz zwischen Masse links und Masse rechts über die Zeit, zeigt Momentanwerte (dargestellt ist \autoref{fig: Differenz - Any})
@@ -16,7 +17,7 @@ Um dennoch Erkenntnisse aus den Wägezellen Daten zu gewinnen, sind folgende Üb
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\linewidth]{img/pyplots/Differenz - Any.png}\\
+  \includegraphics[width=0.7\linewidth]{img/pyplots/Differenz - Any.png}\\
   \caption{Differenz der Gewichtsverteilung von Any}
   \label{fig: Differenz - Any}
 \end{figure}
@@ -29,7 +30,7 @@ Um dennoch Erkenntnisse aus den Wägezellen Daten zu gewinnen, sind folgende Üb
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\linewidth]{img/pyplots/Integral der Differenz - Any.png}\\
+  \includegraphics[width=0.7\linewidth]{img/pyplots/Integral der Differenz - Any.png}\\
   \caption{Integral der Differenz der Gewichtsverteilung von Any}
   \label{fig:weight_distribution_integral_any}
 \end{figure}
@@ -39,14 +40,14 @@ Der in \autoref{fig:weight_distribution_integral_giorgio} dargestellte Verlauf l
 Zwischen 30 und 40 Sekunden steigt der Graph einmal deutlich an und fällt ab ca. Sekunde 37 wieder ab, was auf einen Ausgleichsversuch hindeuten könnte. Die Gewichtsverteilung bleibt aber rechtslastig. 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\linewidth]{img/pyplots/Integral der Differenz - Giorgio.png.png}\\
+  \includegraphics[width=0.7\linewidth]{img/pyplots/Integral der Differenz - Giorgio.png.png}\\
   \caption{Integral der Differenz der Gewichtsverteilung von Giorgio}
   \label{fig:weight_distribution_integral_giorgio}
 \end{figure}
 Auch der in \autoref{fig:weight_distribution_integral_max} dargestellte Graph zeigt eine negtaive Tendenz und somit eine starke rechtsseitige Belastung. Der wellenartige Verlauf könnten Korrekturversuch sein, trotzdem wird die rechtsseitige Belastung stetig größer.  
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\linewidth]{img/pyplots/Integral der Differenz - Max.png}\\
+  \includegraphics[width=0.7\linewidth]{img/pyplots/Integral der Differenz - Max.png}\\
   \caption{Integral der Differenz der Gewichtsverteilung von Max}
   \label{fig:weight_distribution_integral_max}
 \end{figure}
@@ -56,12 +57,17 @@ Es gibt kaum wellenartige Schwankungen, was darauf hinweist das die linke Seite 
 Die Gewichtsverlagerung ist zwar stabil, aber sehr einseitig. 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\linewidth]{img/pyplots/Integral der Differenz - Felix.png}\\
+  \includegraphics[width=0.7\linewidth]{img/pyplots/Integral der Differenz - Felix.png}\\
   \caption{Integral der Differenz der Gewichtsverteilung von Felix}
   \label{fig:weight_distribution_integral_felix}
 \end{figure}
-
-
+\\
+\\
+Was auffällt ist, dass in den Rohdaten die sechs einzelnen Kniebeugen nicht voneinander unterscheidbar sind. 
+Für zukünftige Messungen wäre es daher zu empfehlen, pro Kniebeuge nur einen Graphen zu erstellen, so dass die Fehlbelastungen besser mit dem einzelnen Bewegungsablauf in Einklang gebracht werden können.\\
+\\
+Trotzdem hat die Auswertung und mathematische Aufbereitung der Daten der Wägezellen sinnvolle Ergebnisse erbracht. Und kann für auch für zukünftige Auswertungen angepasst werden. \\
+\\
 \subsection{Auswertung EMG}
 \subsubsection{Symmetrie-Index (SI): Bedeutung und Berechnung}
 
@@ -82,33 +88,33 @@ Ein niedrigerer SI-Wert deutet auf eine gleichmäßigere Belastung und damit auf
 Die durchschnittlichen Symmetrie-Index-Werte der drei analysierten Muskeln (Rectus femoris, Vastus lateralis, Vastus medialis) wurden vor und nach den Ausgleichsübungen berechnet. Zudem wurde ermittelt, wie viele Probanden eine Verbesserung des Symmetrie-Indexes (SI) zeigten:
 
 \begin{table}[htbp]
-    \centering
-      \begin{tabular}{|p{8.455em}|p{5.135em}|p{5.135em}|c|}
-      \hline
-      \textbf{Muskel} & \textbf{Durchschnitt SI vor (\%)} & \textbf{Durchschnitt SI nach (\%)} & \multicolumn{1}{p{5.135em}|}{\textbf{Verbesserungen (Anzahl)}} \\
-      \hline
-      Rectus femoris & \multicolumn{1}{c|}{18.06} & 13.18 & 3 \\
-      \hline
-      Vastus lateralis & 24.24 & 18.70 & 3 \\
-      \hline
-      Vastus medialis & 17.84 & 15.05 & 3 \\
-      \hline
-      \end{tabular}%
-      \caption{durchschnittliche SI-Werte}
-    \label{tab:durchschnittliche-SI-Werte}%
-  \end{table}%
+  \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    \textbf{Muskel} & \textbf{Durchschnitt SI vor \%} & \textbf{Durchschnitt SI nach \%} & {\textbf{Verbesserungen (Anzahl)}} \\
+    \hline
+    Rectus femoris & \multicolumn{1}{c|}{18.06} & 13.18 & 3 \\
+    \hline
+    Vastus lateralis & 24.24 & 18.70 & 3 \\
+    \hline
+    Vastus medialis & 17.84 & 15.05 & 3 \\
+    \hline
+    \end{tabular}%
+    \caption{durchschnittliche SI-Werte}
+  \label{tab:durchschnittliche-SI-Werte}%
+\end{table}%
 
 \subsubsection{Interpretation der Ergebnisse}
 \begin{itemize}
-    \item Rectus femoris 
+    \item Rectus femoris (innen)
     Der durchschnittliche Symmetrie-Index hat sich von 18.06 $\%$ auf 13.18 $\%$ verbessert.
     Bei allen drei Probanden wurde eine Verbesserung festgestellt.
     \textbf{Interpretation:} Die Ausgleichsübungen waren für diesen Muskel besonders effektiv, da die Symmetrie deutlich zugenommen hat.
-    \item Vastus lateralis
+    \item Vastus lateralis (außen)
     Der Symmetrie-Index hat sich von 24.24 $\%$ auf 18.70 $\%$ verbessert.
     Auch hier zeigten alle drei Probanden Verbesserungen.
     \textbf{Interpretation:} Der Vastus lateralis war vor den Übungen der asymmetrischste Muskel, aber die Übungen haben die Symmetrie erfolgreich gesteigert.
-    \item Vastus medialis
+    \item Vastus medialis (innen)
     Der Symmetrie-Index hat sich von 17.84 $\%$ auf 15.05 $\%$ verbessert.
     Bei allen drei Probanden wurde eine Verbesserung festgestellt.
     \textbf{Interpretation:} Die Verbesserungen sind weniger ausgeprägt im Vergleich zu den anderen Muskeln, was darauf hinweist, dass der Muskel bereits eine bessere Ausgangssymmetrie hatte.
