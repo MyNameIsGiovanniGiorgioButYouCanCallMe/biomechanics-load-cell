@@ -1,8 +1,8 @@
 \subsection{Wägezelle}
-
+%todo: Quellen?
 Wägezellen messen mechanische Verformungen.
 Wird auf eine Wägezelle eine Gewichtskraft \mbox{$F = m \cdot g \: [\frac{kg \cdot m}{s^2}]$} (m = aufgebrachte Masse und $g = 9.81 \: \frac{m}{s^2}$)  aufgebracht, verformt sich diese unter der Krafteinwirkung.
-Auf der Wägezelle sind Dehnungsmessstreifen aufgebracht, deren Widerstand sich bei Verformung ändert.
+Auf der Wägezelle sind Dehnungsmessstreifen aufgebracht, deren Widerstand sich bei einer Verformung ändert.
 Die Dehnungsmessstreifen sind in einer Wheatstone-Brücke verschaltet, die die Widerstandsänderung in eine Spannungsänderung umwandelt, die meist nur im Bereich weniger Millivolt liegt.
 Diese Spannungsänderung ist proportional zur aufgebrachten Gewichtskraft.
 Unten dargestellt in \autoref{CAD-Darstellung-Waegezelle} ist der Aufbau einer Wägezelle als CAD-Modell. \\
@@ -21,16 +21,16 @@ Unten dargestellt in \autoref{CAD-Darstellung-Waegezelle} ist der Aufbau einer W
 % \end{figure}
 % Um die Signale der Wägezelle an den HX711 weiterzugeben und die Signale des HX711 mit dem Arduino Nano verarbeiten und die Daten lesbar darzustellen, müssen die drei Komponenten miteinander verschaltet werden und korrekt kommunizieren.
 % Dies wird mit der in \autoref{Gesamtaufbau-waegezelle-mit-Arduino-Nano} dargestellten Schaltung erreicht.\\
-% Zuerst wird die Wägezelle an eine 5 V Gleichstromquelle angeschlossen und dann mit dem HX711 verbunden. 
-% Wodurch die Wägezelle die analogen Signale an den HX711 weitergeben kann. 
+% Zuerst wird die Wägezelle an eine 5 V Gleichstromquelle angeschlossen und dann mit dem HX711 verbunden.
+% Wodurch die Wägezelle die analogen Signale an den HX711 weitergeben kann.
 % Der HX711 wandelt sie dann in ein digitales Signal und gibt dieses an den Arduino Nano weiter.
-% Der VCC-Pin HX711 wird mit dem 5V-Pin des Arduino Nano verbunden. 
-% Der GND-Pin mit dem GND-Pin des Ardiunos. 
-% Der DT-Pin ist der Datenausgang des HX711 und wird mit irgendeinem der Digital-Pins des Nanos verbunden, genauso wie der SCK-Pin, z.B. $DT-Pin -> D3-Pin$ und $SCK-Pin -> D2-Pin$. 
+% Der VCC-Pin HX711 wird mit dem 5V-Pin des Arduino Nano verbunden.
+% Der GND-Pin mit dem GND-Pin des Ardiunos.
+% Der DT-Pin ist der Datenausgang des HX711 und wird mit irgendeinem der Digital-Pins des Nanos verbunden, genauso wie der SCK-Pin, z.B. $DT-Pin -> D3-Pin$ und $SCK-Pin -> D2-Pin$.
 % Der SCK-Pin oder serial-clock-Pin steuert die Übertragung des Signals des DT-Pins.
 % Der Arduino gibt auf dem SCK-Pin den Takt vor, mit dem der HX711 die Daten an den Mikrocontroller sendet.
 % Der Ardiuno setzt den SCK-Pin auf high und dann wieder auf low. Dieser Wechsel, vom Ende eines low-Signals zu einem high- und wieder einem low-Signal ist ein Takt.
-% Der HX711 sendet dann pro Takt ein Bit, also einen low-Puls für 0 und einen high-Puls für 1. 
+% Der HX711 sendet dann pro Takt ein Bit, also einen low-Puls für 0 und einen high-Puls für 1.
 % Der Arduino-Nano wird dann an einen Computer angeschlossen.
 % In der Arduino IDE können mithilfe der passenden Library und einem Code die Daten ausgelesen und gespeichert werden.
 % \\
@@ -79,16 +79,14 @@ Unten dargestellt in \autoref{CAD-Darstellung-Waegezelle} ist der Aufbau einer W
 \subsection{Elektromyographie}
 
 Mit einem EMG kann die elektrische Muskel-Aktivität gemessen werden.
-
 Dazu wird die elektrische Aktivität in einem ruhenden und einem kontrahierten Muskel gemessen. Das Signal entsteht aus dem Aktionspotential der Muskelfasermembran und dem Depolarisations- und Repolarisationsverlauf, der in \autoref{fig:Depolarisations-und-Repolarisationsverlauf} als Funktion der Zeit dargestellt ist. Im Ruhetonus liegt das Potential zwischen $-80$ und  $-90$ mV.
-
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{img/De-Repolarisation.PNG}
     \caption{De- und Repolarisation und Aktionspotential Muskelfasermembran \cite{Vorlesung-Muskulatur-EMG}}
     \label{fig:depolarisations-und-repolarisationsverlauf}
 \end{figure}
-
+\\
 Eine Muskelkontraktion startet auf Sarkomerebene.
 Durch das Zusammenwirken aller Sarkomere wird die Umwandlung von chemischer Energie in mechanische Energie als Kontraktion des Muskels sichtbar.
 \\
@@ -100,7 +98,8 @@ Der Rezeptor ist ein Kanal für Kationen, also positiv geladene Ionen wie Natriu
 In \autoref{fig:depolarisations-und-repolarisationsverlauf} als Schwelle gekennzeichet, ab der die Steigung der Potential-Funktion zunimmt, bis die Funktion bis $+20$ bis $+30$ mV steigt.
 Das Aktionenpotential löst nun wiederum die Öffnung von spannungsgesteuerten Calcium-Kanälen aus, wodurch Calcium-Ionen in der Muskelfaser freigesetzt werden. Es kommt zu einer Anhäufung von Calcium-Ionen in der Muskelfaser. Dadurch steigt Calciumkonzentration, was die Kontraktion der Muskelfaser auslöst. \\
 Noch bevor der Höhepunkt des Aktionspotentials erreicht ist, werden die Natriumkanäle inaktiv und positiv geladene Kalium strömen aus der Zelle. Das Potential nähert sich nach einer Hyperpolarisationsphase, während der das Pontential unter das Ruhepotential von $-80$ mV fällt, wieder dem Ruhepotential an.
-
+\\
+\\
 Die EMG-Messung findet in der Hochschule im Labor für Ergonomie statt.
 Die Daten werden mithilfe eines Programms von NORAXON ausgelesen und analysiert.
 
