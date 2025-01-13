@@ -1,7 +1,8 @@
 \subsection{Wägezelle}
 
-In diesem Versuch werden Wägezellen eingesetzt um etwaige Ungleichgewichte 
-In diesem Versuch wird eine Wägezelle mit dem Wägesensor HX711 eingesetzt, der in \autoref{fig:HX711} dargestellt ist.
+In diesem Versuch werden Wägezellen eingesetzt um etwaige Ungleichgewichte beim Ausführen einer Kniebeuge zu messen. Hierzu stellt sich der Proband auf zwei Wägezellen und führt eine Kniebeuge aus, die Wägezellen messen während dessen die auf ihnen lastende Gewichtskraft. Wird eine Seite während der Kniebeuge stärker belastet, sollte die jeweilige Wägezelle einen höhren Wert messen. \\
+\\ 
+An die Wägezelle ist der Wägesensor HX711 angeschlossen, der in \autoref{fig:HX711} dargestellt ist.
 Der Sensor HX711 ist ein Analog-Digital-Wandler, der die analogen Spannungsänderungen der Wheatstone-Brücke verstärkt und in ein digitales Signal umwandelt.
 Dieses digitale Signal kann dann von einem Mikrocontroller verarbeitet werden.
 In diesem Projekt wird der Arduino Nano verwendet wie in \autoref{fig:Nano-Pinlayout} dargestellt.
@@ -11,7 +12,6 @@ In diesem Projekt wird der Arduino Nano verwendet wie in \autoref{fig:Nano-Pinla
     \caption{Nano-Pinlayout \cite{Arduino}}
     \label{fig:Nano-Pinlayout}
 \end{figure}
-
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.6\textwidth]{img/HX711.png}
