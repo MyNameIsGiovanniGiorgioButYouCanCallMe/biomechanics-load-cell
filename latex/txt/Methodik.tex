@@ -1,37 +1,41 @@
 \subsection{Zeitlicher Ablauf des Gesamtversuchs}
-Der Versuch ist so aufgebaut, dass bei der ersten Messung die links- und rechtseitige Belastung der Probanden bei einer Kniebeuge im untrainierten Zustand mit einem EMG gemessen werden. 
-Dann haben die Probanden für vier Wochen drei spezifisch ausgewählte Ausgleichsübungen trainiert, die mögliche Ungleichgewichte ausgleichen sollen. 
-Nach vier Wochen findet eine zweite Messung statt. Die analog zur ersten Messung abläuft. Bei der zweiten Messung wurden als zusätzliche Messinstrumente zwei Wägezellen eingesetzt. 
-Nach der zweiten Messung erfolgt die Auswertung der Ergebnisse. 
-Der Ablauf ist in \autoref{fig: Ablauf-gesamtversuch} dargestellt. 
+Der Versuch ist so aufgebaut, dass bei der ersten Messung die links- und rechtseitige Belastung der Probanden bei einer Kniebeuge im untrainierten Zustand mit einem EMG gemessen werden.
+Dann haben die Probanden für vier Wochen drei spezifisch ausgewählte Ausgleichsübungen trainiert, die mögliche Ungleichgewichte ausgleichen sollen.
+Nach vier Wochen findet eine zweite Messung statt. Die analog zur ersten Messung abläuft. Bei der zweiten Messung wurden als zusätzliche Messinstrumente zwei Wägezellen eingesetzt.
+Nach der zweiten Messung erfolgt die Auswertung der Ergebnisse.
+Der Ablauf ist in \autoref{fig:Ablauf-gesamtversuch} dargestellt.
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.4\textwidth]{img/Ablauf-gesamtversuch.jpeg}
+    \includegraphics[width=0.9\textwidth]{img/Ablauf-gesamtversuch.jpg}
     \caption{Zeitlicher Ablauf Versuch}
-    \label{fig: Ablauf-gesamtversuch}
+    \label{fig:Ablauf-gesamtversuch}
 \end{figure}
-\\
-\\ 
+\clearpage
 \subsection{Wägezelle}
 In diesem Versuch werden Wägezellen eingesetzt um etwaige Ungleichgewichte beim Ausführen einer Kniebeuge zu messen.
 Hierzu stellt sich der Proband auf zwei Wägezellen und führt eine Kniebeuge aus, die Wägezellen messen während dessen die auf ihnen lastende Gewichtskraft.
-Wird eine Seite während der Kniebeuge stärker belastet, sollte die jeweilige Wägezelle einen höhren Wert messen. \\ \\
+Wird eine Seite während der Kniebeuge stärker belastet, sollte die jeweilige Wägezelle einen höhren Wert messen.
 An die Wägezelle ist der Wägesensor HX711 angeschlossen, der in \autoref{fig:HX711} dargestellt ist.
+\\
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.3\textwidth]{img/HX711.png}
     \caption{HX711 \cite{prilchen}}
     \label{fig:HX711}
 \end{figure}
+% \clearpage
 Der Sensor HX711 ist ein Analog-Digital-Wandler, der die analogen Spannungsänderungen der Wheatstone-Brücke verstärkt und in ein digitales Signal umwandelt.
 Dieses digitale Signal kann dann von einem Mikrocontroller verarbeitet werden.
 In diesem Projekt wird der Arduino Nano verwendet wie in \autoref{fig:Nano-Pinlayout} dargestellt.
+\\
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\textwidth]{img/Nano-Pinlayout.png}
+    \includegraphics[width=0.7\textwidth]{img/Nano-Pinlayout.png}
     \caption{Nano-Pinlayout \cite{Arduino}}
     \label{fig:Nano-Pinlayout}
 \end{figure}
+\clearpage
+\noindent
 Um den Aufbau verwenden zu können müssen alle Komponenten richtig miteindander verschaltet sein und kommunizieren.
 Dafür wird die Wägezelle an eine 5 V Gleichstromquelle angeschlossen und mit dem HX711 verbunden.
 Die Wägezelle kann so die analogen Signale an den HX711 weitergeben.
@@ -46,12 +50,12 @@ Dieser Wechsel, vom Ende eines low-Signals zu einem high- und wieder einem low-S
 Der HX711 sendet dann pro Takt ein Bit, also einen low-Puls für 0 und einen high-Puls für 1.
 \\
 Der Arduino-Nano wird nun an einen Computer angeschlossen.
-Wie in \autoref{Gesamtaufbau-waegezelle-mit-Ardiuno-Nano} dargestellt, sind die Wägezellen dann mit den HX711 verbunden und diese wiederum mit einem Arduino-Nano, welcher selber mit einem Computer verbunden ist.
+Wie in \autoref{fig:gesamtaufbau-waegezelle-mit-arduino-nano} dargestellt, sind die Wägezellen dann mit den HX711 verbunden und diese wiederum mit einem Arduino-Nano, welcher selber mit einem Computer verbunden ist.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{img/Schaltungs-Aufbau.png}
     \caption{Gesamtaufbau Wägezelle mit Arduino Nano}
-    \label{Gesamtaufbau-waegezelle-mit-Arduino-Nano}
+    \label{fig:gesamtaufbau-waegezelle-mit-arduino-nano}
 \end{figure}
 \\
 Is die Hardware nun korrekt konfiguriert, muss die Software geschrieben werden die alles steuert.
